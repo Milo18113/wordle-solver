@@ -1,11 +1,14 @@
 from .word import Hint, Word
 from .config import word_dictionary
+from enum import Enum
+from abc import ABC, abstractmethod
 
-import os
-import random
+class GuessMethod(Enum):
+    RANDOM = 1
+    BRUTE_FORCE = 2
+    WORD_PREDICTION = 3
 
-class Solver: 
-    # _skill_level: int
+class Solver(ABC): 
     _prev_guesses: list[Word]
     _possible_guesses: list[Word]          # o tree
 
@@ -15,12 +18,7 @@ class Solver:
     _starter_words: list[Word]
     _my_answer: Word
 
-    # def __init__(self, skill_level: int = 1):
     def __init__(self):
-        # if skill_level < 1 or skill_level > 5:
-        #     raise ValueError("Skill level must be between 1 and 5")
-        # self._skill_level = skill_level
-
         self._prev_guesses = []
         self._possible_guesses = []     # o tree
 
@@ -60,28 +58,11 @@ class Solver:
         return self._grey_chars
     
     
+    ## Guess Logic ##
 
-
+    @abstractmethod
     def guess(self) -> Word:
-        self.update_knowledge()
-        # self.update_possible_guesses_bf(word_dictionary)        
-        # guess: Word # choose word with highest score from possible_guesses
-        ## Test
-        guess_str = self.get_random_guess(word_dictionary)
-        #
-        return Word(value=guess_str)
-    
-    def get_random_guess(self, filename: str) -> str:
-        # Construimos la ruta hacia la carpeta repositories
-        file_path = os.path.join("repositories", filename)
-
-        with open(file_path, "r", encoding="utf-8") as file:
-            words = [line.strip() for line in file if line.strip()]
-
-        if len(words) == 0:
-            raise ValueError("El archivo no contiene palabras válidas.")
-
-        return random.choice(words)
+        raise NotImplementedError
     
     def update_knowledge(self):
         if len(self._prev_guesses) == 0:        # First try
@@ -101,21 +82,8 @@ class Solver:
                 self.add_yellow_char(char)
             if (hint == Hint.GREY):
                 self.add_grey_char(char)
-    
-    # Using score based on position and char matching (Brute Force)
-    def update_possible_guesses_bf(self, filename: str):
-        if len(self._prev_guesses) == 0:        # First try
-            self._possible_guesses = self._starter_words
-            return
-        
-        my_answer = ""
-        for i in range(5):
-            closest = self.choose_closest_prev_guess()        # Temporary
-            char, hint = closest.get_char_hint(i)
-            # if 
-        pass
 
-    def choose_closest_prev_guess(self) -> Word:
+    def get_closest_prev_guess(self) -> Word:
         # return self._prev_guesses[-1]
     
         # prev guesses cannot be empty if this method is accessed

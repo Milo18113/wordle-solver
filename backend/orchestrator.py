@@ -1,14 +1,27 @@
-from backend.solver import Solver
+from backend.solver import GuessMethod, Solver
+from backend.solver_factory import SolverFactory
 from backend.validator import Validator
 from backend.config import word_dictionary
 
 class Orchestrator:
+    _instance: 'Orchestrator' | None = None
+
     _turn: int
     _total_turns: int
     # app: StreamlitApp
 
     solver: Solver
     validator: Validator
+
+    @classmethod
+    def get_instance(cls, method: GuessMethod) -> 'Orchestrator':
+        if cls._instance is None:
+            solver = SolverFactory.create_solver(method)
+            validator = Validator()
+
+            cls._instance = Orchestrator(solver, validator)
+
+        return cls._instance
 
     def __init__(self, solver: Solver, validator: Validator):
         self.solver = solver

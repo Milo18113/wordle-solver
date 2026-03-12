@@ -1,6 +1,5 @@
 from backend.orchestrator import Orchestrator
-from backend.orchestrator_factory import OrchestratorFactory
-from backend.solver import Solver
+from backend.solver import Solver, GuessMethod
 from backend.validator import Validator
 
 from colorama import init
@@ -8,7 +7,7 @@ from colorama import init
 from backend.word import Hint, Word
 
 # init(autoreset=True)   # Colorama
-game = OrchestratorFactory.get_instance()
+game = Orchestrator.get_instance(method=GuessMethod.RANDOM)
 won: bool = False
 
 # Display welcome message

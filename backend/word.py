@@ -12,7 +12,6 @@ class Hint(Enum):
             return f"{Fore.WHITE}O{Fore.RESET}"
         if self == Hint.YELLOW:
             return f"{Fore.YELLOW}O{Fore.RESET}"
-        # if self == Hint.GREEN:
         return f"{Fore.GREEN}O{Fore.RESET}"
 
 
@@ -64,11 +63,9 @@ class Word:
         if self._hints is None:
             raise ValueError(f"Word {self} has no hints")
         return self._value[index], self._hints[index]
-    
-    ## add getcharhint method
-    
-    # Based only on Green chars
+     
     def get_greens(self) -> int:
+        """Based only on Green chars"""
         greens = 0
         for i in range(5):
             if self.get_char_hint(i)[1] == Hint.GREEN:
