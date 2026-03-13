@@ -7,7 +7,7 @@ from colorama import init
 from backend.word import Hint, Word
 
 # init(autoreset=True)   # Colorama
-game = Orchestrator.get_instance(method=GuessMethod.RANDOM)
+game = Orchestrator.get_instance(method=GuessMethod.BRUTE_FORCE)
 won: bool = False
 
 # Display welcome message
@@ -20,7 +20,8 @@ while game.get_turn() <= game.get_total_turns():
     game.solver.add_prev_guess(Word(value=guess.get_value(), hints=hints))
 
     # Display turn info
-    print(f"Intento {game.get_turn()}: {guess} {game.validator.to_console_view(hints)}\n")
+    print(f"Intento {game.get_turn()}: {guess} {game.validator.to_console_view(hints)}")
+    print(f"Ha ganado: {won}\n")
 
     if won:
         break
@@ -36,3 +37,9 @@ prev_guesses = game.solver.get_prev_guesses()
 print("\nPrev guesses: ")
 for i in range(len(prev_guesses)):
     print(f"{i}: {prev_guesses[i]}")
+
+# print("\nPossible guesses: ")
+# for i in range(len(game.solver._possible_guesses)):
+#     print(f"{i}: {game.solver._possible_guesses[i]}")
+
+# print(game.finish_game(won))

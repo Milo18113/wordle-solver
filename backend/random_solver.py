@@ -12,8 +12,9 @@ class RandomSolver(Solver):
     def guess(self) -> Word:
         self.update_knowledge()
 
-        # Construimos la ruta hacia la carpeta repositories
+        # Obtener todas las palabras del diccionario
         file_path = os.path.join("repositories", word_dictionary)
+        words = []
 
         with open(file_path, "r", encoding="utf-8") as file:
             words = [line.strip() for line in file if line.strip()]
@@ -21,4 +22,4 @@ class RandomSolver(Solver):
         if len(words) == 0:
             raise ValueError("El archivo no contiene palabras válidas.")
 
-        return Word(guess=random.choice(words))
+        return Word(value=random.choice(words))

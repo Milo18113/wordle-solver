@@ -1,3 +1,5 @@
+from __future__ import annotations
+import random
 from backend.solver import GuessMethod, Solver
 from backend.solver_factory import SolverFactory
 from backend.validator import Validator
@@ -43,7 +45,7 @@ class Orchestrator:
         pass
 
     def start_game(self, total_turns: int, random_answer: bool = True) -> str:
-        self.validator.choose_answer_from(word_dictionary, random_answer)
+        self.validator.choose_answer_from(word_dictionary, random_choice=random_answer)
         self._turn = 1
         self._total_turns = total_turns
 

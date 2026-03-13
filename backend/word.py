@@ -17,7 +17,7 @@ class Hint(Enum):
 
 class Word:
     _value: str
-    _score: int     # possibility
+    _score: int     # possibility: 100 for Green, 10 for Yellow, 0 for Grey, 1 for Yellow in another spot
     _hints: list[Hint] | None
 
     def __init__(self, value: str, score: int = 0, hints: list | None = None):

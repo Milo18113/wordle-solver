@@ -24,17 +24,17 @@ class Validator:
         self._answer = Word(random.choice(words))
 
     def validate_guess(self, guess_word: Word) -> tuple[bool, list[Hint]]:
-        answer = self._answer
-        guess = str(guess_word)
+        answer = self._answer.get_value()
+        guess = guess_word.get_value()
 
         if answer == guess:
             return True, [Hint.GREEN for i in range(5)]
         
         hints = []
         for i in range(5):
-            if answer.get_value()[i] == guess[i]:
+            if answer[i] == guess[i]:
                 hints.append(Hint.GREEN)
-            elif guess[i] in answer.get_value():
+            elif guess[i] in answer:
                 hints.append(Hint.YELLOW)
             else:
                 hints.append(Hint.GREY)
@@ -42,6 +42,7 @@ class Validator:
         return False, hints
 
     def get_answer(self):
+        """Only called by game [orchestrator] when the game is won"""
         return self._answer
 
 

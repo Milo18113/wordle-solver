@@ -1,5 +1,9 @@
 from .word import Word
 from .solver import Solver
+from .config import word_dictionary
+
+import random
+import os
 
 class BruteForceSolver(Solver):
     def __init__(self):
@@ -7,21 +11,36 @@ class BruteForceSolver(Solver):
 
     def guess(self) -> Word:
         self.update_knowledge()
-        guess_str: str = ""
-        # TODO: Implementar lógica para adivinar la palabra
-        return Word(guess=guess_str)
+        self.update_possible_guesses()
+        return self.get_highest_score_word()
 
-    # Using score based on position and char matching (Brute Force)
     def update_possible_guesses(self) -> None:
-        if len(self._prev_guesses) == 0:        # First try
-            self._possible_guesses = self._starter_words
+        """
+        Adds words with higher or equal [score] to the closest previous guess. 
+        Additional [score] is earned for having a known [yellow char] in another position.
+        """
+        # First try
+        if len(self._prev_guesses) == 0:        
+            self._possible_guesses = self._starter_words.copy()
+            random.shuffle(self._possible_guesses)
             return
         
-        my_answer: str = ""
-        closest = self.get_closest_prev_guess()        # Temporary
-        for i in range(5):
-            char, hint = closest.get_char_hint(i)
-            # if 
-        pass
+        # Obtener todas las palabras del diccionario
+        file_path = os.path.join("repositories", word_dictionary)
+        words = []
 
-    
+        with open(file_path, "r", encoding="utf-8") as file:
+            words = [line.strip() for line in file if line.strip()]
+
+        if len(words) == 0:
+            raise ValueError("El archivo no contiene palabras válidas.")
+
+        # Filter words
+        self._possible_guesses = []
+        closest = self._my_answer
+        for item in words:
+            if item in self._prev_guesses:
+                continue
+            eval = self.evaluate_word(Word(item))
+            if eval.get_score() >= closest.get_score():
+                self._possible_guesses.append(eval)
