@@ -17,7 +17,9 @@ while game.get_turn() <= game.get_total_turns():
     game.solver.add_prev_guess(Word(value=guess.get_value(), hints=hints))
 
     # Display turn info
-    print(f"Intento {game.get_turn()}: {guess} {game.validator.to_console_view(hints)}\n")
+    print(f"Intento {game.get_turn()}: {guess} {game.validator.to_console_view(hints)}")
+    my_ans = game.solver._my_answer
+    print(f"My answer: {my_ans} {game.validator.to_console_view(my_ans.get_hints()) if my_ans.get_hints() is not None else ''}\n")
 
     if won:
         break
@@ -30,9 +32,9 @@ print(game.finish_game(won))
 prev_guesses = game.solver.get_prev_guesses()
 
 # Debug
-print("\nPrev guesses: ")
-for i in range(len(prev_guesses)):
-    print(f"{i}: {prev_guesses[i]}")
+# print("\nPrev guesses: ")
+# for i in range(len(prev_guesses)):
+#     print(f"{i}: {prev_guesses[i]}")
 
 # print("\nPossible guesses: ")
 # for i in range(len(game.solver._possible_guesses)):
