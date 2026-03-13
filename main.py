@@ -1,12 +1,9 @@
 from backend.orchestrator import Orchestrator
-from backend.solver import Solver, GuessMethod
+from backend.solver import GuessMethod
 from backend.validator import Validator
 
-from colorama import init
+from backend.word import Word
 
-from backend.word import Hint, Word
-
-# init(autoreset=True)   # Colorama
 game = Orchestrator.get_instance(method=GuessMethod.BRUTE_FORCE)
 won: bool = False
 
@@ -20,8 +17,7 @@ while game.get_turn() <= game.get_total_turns():
     game.solver.add_prev_guess(Word(value=guess.get_value(), hints=hints))
 
     # Display turn info
-    print(f"Intento {game.get_turn()}: {guess} {game.validator.to_console_view(hints)}")
-    print(f"Ha ganado: {won}\n")
+    print(f"Intento {game.get_turn()}: {guess} {game.validator.to_console_view(hints)}\n")
 
     if won:
         break
