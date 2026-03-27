@@ -6,6 +6,21 @@ import os
 
 class Validator:
     _answer: Word
+    
+    def is_green(self, char: str) -> bool:
+        answer = self._answer.get_value()
+        for i in range(5):
+            if answer[i] == char:
+                return True
+        return False
+    
+    def is_yellow(self, char: str) -> bool:
+        answer = self._answer.get_value()
+        for i in range(5):
+            if answer[i] == char:
+                return True
+        return False
+
 
     def choose_answer_from(self, filename: str, random_choice: bool) -> None:
         if not random_choice:
@@ -34,6 +49,7 @@ class Validator:
         for i in range(5):
             if answer[i] == guess[i]:
                 hints.append(Hint.GREEN)
+            # elif guess[i] in answer and guess.count(guess[i]) == answer.count(guess[i]):
             elif guess[i] in answer:
                 hints.append(Hint.YELLOW)
             else:

@@ -1,0 +1,46 @@
+QWidget {
+    background-color: #2b2b2b;
+}
+
+QLabel {
+    color: white;
+    font-size: 16px;
+    background-color: #1900ffff;
+}
+
+/* Combo Box */
+QComboBox {
+    background-color: #404040;
+    color: white;
+    border: 1px solid #555;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+/* Buttons */
+QPushButton {
+    border: none;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #3498db;
+    color: white;
+}
+
+QPushButton#primaryButton {
+    background-color: #3498db;
+    color: white;
+}
+
+QPushButton#primaryButton:hover {
+    background-color: #2980b9;
+}
+
+QPushButton#dangerButton {
+    background-color: #e74c3c;
+    color: white;
+}
+
+QPushButton#dangerButton:hover {
+    background-color: #c0392b;
+}

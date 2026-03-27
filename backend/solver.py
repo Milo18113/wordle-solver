@@ -1,12 +1,7 @@
 from .word import Hint, Word
 from .config import word_dictionary
-from enum import Enum
+from .enums import GuessMethod
 from abc import ABC, abstractmethod
-
-class GuessMethod(Enum):
-    RANDOM = 1
-    BRUTE_FORCE = 2
-    WORD_PREDICTION = 3
 
 class Solver(ABC): 
     _prev_guesses: list[Word]
@@ -147,7 +142,7 @@ class Solver(ABC):
             if char == my_char and my_hint == Hint.GREEN:
                 hints.append(Hint.GREEN)
                 score += 100
-            # elif self.is_green(char) and my_hint != Hint.GREEN:
+            # elif self.is_green(char) and my_hint != Hint.GREEN: #
             #     hints.append(Hint.GREY)
             elif self.is_yellow(char) and char not in yellow_chars_here:
                 hints.append(Hint.YELLOW)

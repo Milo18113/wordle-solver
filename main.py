@@ -1,5 +1,5 @@
 from backend.orchestrator import Orchestrator
-from backend.solver import GuessMethod
+from backend.enums import GuessMethod
 from backend.validator import Validator
 
 from backend.word import Word

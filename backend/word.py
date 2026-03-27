@@ -1,20 +1,3 @@
-from enum import Enum
-
-from colorama import Fore
-
-class Hint(Enum):
-    GREY = 0
-    YELLOW = 1
-    GREEN = 2
-
-    def __str__(self) -> str:
-        if self == Hint.GREY:
-            return f"{Fore.WHITE}O{Fore.RESET}"
-        if self == Hint.YELLOW:
-            return f"{Fore.YELLOW}O{Fore.RESET}"
-        return f"{Fore.GREEN}O{Fore.RESET}"
-
-
 class Word:
     _value: str
     _score: int     # possibility: 100 for Green, 10 for Yellow, 0 for Grey, 11 for Yellow in another spot
