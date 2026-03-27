@@ -22,7 +22,7 @@ class MiApp(QWidget):
         smallspacer.setFixedSize(0, 20)
 
         # Matrix to store square references 5x5
-        self.squares = [[None for _ in range(5)] for _ in range(5)]
+        self.squares = [[None for _ in range(5)] for _ in range(6)]
 
         #### Main vertical layout (wrapper)
         main_vertical_layout = QVBoxLayout()
@@ -35,9 +35,9 @@ class MiApp(QWidget):
         
         ### Word Attempts Column
         column_layout = QVBoxLayout()
-        column_layout.setSpacing(35)
+        column_layout.setSpacing(20)
         
-        for row in range(5):
+        for row in range(6):
             row_layout = QHBoxLayout()
             row_layout.setSpacing(5)  # spacing between squares in row
             
