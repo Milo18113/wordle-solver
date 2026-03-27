@@ -17,6 +17,23 @@ QComboBox {
     border-radius: 3px;
 }
 
+QComboBox::drop-down {
+    /* border: none;
+    width: 20px; */
+}
+
+QComboBox QAbstractItemView {
+    background-color: #404040;
+    color: white;
+    border: 1px solid #555;
+    selection-background-color: #3498db;
+    outline: none;
+}
+
+QComboBox QAbstractItemView::item:selected {
+    background-color: #3498db;
+}
+
 /* Buttons */
 QPushButton {
     border: none;
